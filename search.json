@@ -1,0 +1,121 @@
+[
+  {
+    "objectID": "timeline.html",
+    "href": "timeline.html",
+    "title": "Today on the timeline",
+    "section": "",
+    "text": "Educational use only. No identifiers. The output below is a deterministic model of SAH natural history — a teaching heuristic, not a directive. Verify against your institution’s protocols and the primary literature (Sources)."
+  },
+  {
+    "objectID": "simulator.html",
+    "href": "simulator.html",
+    "title": "Virtual patient",
+    "section": "",
+    "text": "Educational use only. These are scripted teaching cases, not real patients. The scoring rubric reflects a draft reading of the literature (Sources) — treat disagreements with your attending as the authority.\n\nAdvance the case day by day. Pick every action you would take, order, or actively consider, then submit to see the natural history and your score."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Neuro Pattern Recognition",
+    "section": "",
+    "text": "Educational use only. Not a medical device. Does not replace attending or fellow supervision, institutional protocols, or clinical judgment. Do not enter protected health information. All clinical content is DRAFT pending source verification — see Sources.\nThe Neurocritical Care Society’s ENLS answers “what do I do in the first hour.” This tool addresses a different gap: a trainee two weeks into an NCCU rotation can examine a patient and list problems, but does not yet carry the day-by-day mental model of what a given subarachnoid hemorrhage patient is most likely to do next — the anticipatory model that a fellowship builds slowly by osmosis.\nModule 1 is aneurysmal SAH. The structure (a time × system matrix) is built so that status epilepticus, TBI, ICH, and others can become sibling modules later."
+  },
+  {
+    "objectID": "index.html#the-four-modes",
+    "href": "index.html#the-four-modes",
+    "title": "Neuro Pattern Recognition",
+    "section": "The four modes",
+    "text": "The four modes\n\n\n\nToday on the timeline\nEnter a patient’s day post-ictus plus a few anchors (grade, modified Fisher, IVH, aneurysm secured, EVD, Na, Hgb). Get where they sit on the natural-history curve, the risks that dominate today ranked by salience, targeted assessments, decision thresholds, common trainee errors, red flags, and the evidence behind each.\n\n\nVirtual patient\nAdvance a scripted SAH patient day by day. Each day: a vignette, a menu of actions, then the natural history is revealed and your choices are scored against a teaching rubric.\n\n\nPlan critique\nType your assessment and plan for the day. A guard-railed AI tutor critiques it against the deterministic engine and the evidence — emphasizing anticipatory gaps (“you did not mention that day 6 is the start of the DCI window”).\n\n\nEvidence cards\nThe curated claim / threshold / citation cards that back every recommendation."
+  },
+  {
+    "objectID": "index.html#how-it-is-built",
+    "href": "index.html#how-it-is-built",
+    "title": "Neuro Pattern Recognition",
+    "section": "How it is built",
+    "text": "How it is built\nTwo layers, deliberately:\n\nA deterministic engine — a transparent, auditable model of SAH natural history that runs entirely in your browser. No server, no cost, works offline. This is the safety-critical core.\nAn AI tutor layer — a guard-railed Claude model, called through a server-side proxy so no key is exposed, and fed the deterministic engine’s output as ground truth. It teaches; it does not issue orders. The rest of the app works without it."
+  },
+  {
+    "objectID": "critique.html",
+    "href": "critique.html",
+    "title": "Plan critique",
+    "section": "",
+    "text": "Educational use only. Do not enter protected health information — no names, MRNs, dates of birth, or other identifiers. The tutor is a teaching aid fed a deterministic model as ground truth; it does not issue medical orders. Always confirm with your fellow or attending.\n\nSet the patient state on the left, then either paste your assessment and plan for a critique, ask the tutor a focused question, or read the deterministic engine brief directly."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "Neuro Pattern Recognition (NPR) is a companion for pattern recognition in core neurocritical care diagnoses, built in the spirit of the Neurocritical Care Society’s ENLS but organized around a disease’s natural history rather than the first hour of resuscitation. Aneurysmal subarachnoid hemorrhage is the prototype module."
+  },
+  {
+    "objectID": "about.html#design",
+    "href": "about.html#design",
+    "title": "About",
+    "section": "Design",
+    "text": "Design\nTwo layers:\n\nA deterministic engine (js/npr-*.js) — a transparent time × system model of SAH natural history that runs entirely in the browser. It scores which complication domains dominate on a given day (rebleeding collapses once the aneurysm is secured; DCI is a skew-bell peaking day 6–9, scaled by modified Fisher and IVH; hyponatremia salience jumps when the sodium is already low; and so on), then assembles the day’s assessments, thresholds, pearls, and red flags from a matrix of timeline entries. It is auditable and works offline.\nAn AI tutor — a guard-railed Claude model reached through a Firebase Cloud Function proxy (so no API key is ever in the browser), fed the deterministic engine’s brief as ground truth plus a retrieved slice of the evidence cards. It gives Socratic feedback on a trainee’s plan and answers focused questions. It is instructed to teach, not to order, and to name what to escalate and what to discuss with the team. The rest of the app works without it."
+  },
+  {
+    "objectID": "about.html#status",
+    "href": "about.html#status",
+    "title": "About",
+    "section": "Status",
+    "text": "Status\nPrototype. All clinical content is DRAFT pending verification against primary sources — see Sources. The reference specification (including a fuller design document and an R implementation of the same engine) lives in a separate repository."
+  },
+  {
+    "objectID": "about.html#not-a-medical-device",
+    "href": "about.html#not-a-medical-device",
+    "title": "About",
+    "section": "Not a medical device",
+    "text": "Not a medical device\nEducational use only. Not a substitute for attending or fellow supervision, institutional protocols, or clinical judgment. Do not enter protected health information."
+  },
+  {
+    "objectID": "evidence.html",
+    "href": "evidence.html",
+    "title": "Evidence cards",
+    "section": "",
+    "text": "Every card below is an unverified draft. They are written against the AHA/ASA 2023 SAH guideline and Neurocritical Care Society statements but have not been checked against the primary text. Do not rely on the specific numbers until the Sources checklist is signed off."
+  },
+  {
+    "objectID": "phases.html",
+    "href": "phases.html",
+    "title": "Natural history of aneurysmal SAH",
+    "section": "",
+    "text": "Educational overview. DRAFT — see Sources. Phases overlap on purpose: a thick-clot, poor-grade patient stays in the DCI window past day 14.\nThe tool organizes SAH around a time × system matrix. Time is day post-ictus (day of hemorrhage = day 0), with a secondary clock of day post-securing for blood-pressure liberalization and VTE prophylaxis. The systems: rebleeding, hydrocephalus/EVD/ICP, DCI/vasospasm, sodium/volume, cardiopulmonary, fever/infection, seizure, hematologic (anemia/VTE), and cognition/mood/disposition."
+  },
+  {
+    "objectID": "phases.html#the-five-phases",
+    "href": "phases.html#the-five-phases",
+    "title": "Natural history of aneurysmal SAH",
+    "section": "The five phases",
+    "text": "The five phases\n\nPhase 1 — Hyperacute / pre-securing (day 0–1)\nThe aneurysm is not yet secured. Everything is organized around preventing rebleeding (highest risk in the first 24 h, high mortality): titratable blood-pressure control, pain and stimulation control, reversal of anticoagulation, and securing the aneurysm as early as feasible. Treat acute obstructive hydrocephalus with an EVD, but avoid aggressive CSF drainage before the aneurysm is secured. Expect cardiopulmonary stunning — troponin bump, QTc changes, non-coronary wall-motion abnormality, neurogenic pulmonary edema. Grade the patient (WFNS/Hunt-Hess, modified Fisher). Start nimodipine. The seizure-prophylaxis decision is made here — a short course or none, and not phenytoin.\n\n\nPhase 2 — Early post-securing (day 1–4)\nAneurysm secured. Blood-pressure goals liberalize — the target becomes euvolemia, not prophylactic hypervolemia. Sodium starts to drift. Establish the DCI-surveillance cadence: hourly exams, a baseline TCD, an agreed imaging plan. Begin pharmacologic VTE prophylaxis a set interval after securing. In poor-grade patients, set up multimodal monitoring (cEEG, PbtO2).\n\n\nPhase 3 — DCI window (day 4–14, peak ~6–9)\nDelayed cerebral ischemia is the dominant threat. Detect it: hourly exam for a new focal deficit or a drop in consciousness; TCD trends; CT perfusion/CTA when the exam changes; cEEG (alpha-delta ratio) and PbtO2 in the patient too poor-grade to examine. Treat it: exclude the mimics (seizure, hydrocephalus, hyponatremia, sedation, fever), then induced hypertension first with a bedside response check, endovascular rescue (IA vasodilators, angioplasty) if refractory. “Triple-H” is obsolete — hemodilution and prophylactic hypervolemia are out. The sodium nadir and the fever peak fall in this window; keep the hemoglobin higher than the usual restrictive ICU trigger while DCI risk is active.\n\n\nPhase 4 — Resolution (day 10–21)\nVasospasm risk recedes (later in thick-clot / poor-grade patients). Nimodipine finishes at day 21. Begin the EVD wean — raise the level or clamp, watch exam / ICP / ventricle size; a failed wean means a VP shunt. Shunt dependence is common after IVH, poor grade, and older age — set expectations with the family early. Mobilize; start rehab planning.\n\n\nPhase 5 — Recovery / pre-discharge (day 14–30+)\nShunt if the wean failed. Taper any AED if the patient is seizure-free. Name the cognitive, executive, and mood sequelae explicitly — depression, anxiety, PTSD, and fatigue are common even after good motor recovery, and a patient who walks out the door can still have disabling executive dysfunction. Arrange follow-up vascular imaging (coil surveillance). Counsel secondary prevention: smoking cessation, blood-pressure control, and familial screening when criteria are met."
+  },
+  {
+    "objectID": "sources.html",
+    "href": "sources.html",
+    "title": "Sources & content verification",
+    "section": "",
+    "text": "Nothing on this site should be treated as verified. Every evidence card is verified: false until a content reviewer checks it against the primary text and initials the row below."
+  },
+  {
+    "objectID": "sources.html#primary-sources-the-draft-is-written-against",
+    "href": "sources.html#primary-sources-the-draft-is-written-against",
+    "title": "Sources & content verification",
+    "section": "Primary sources the draft is written against",
+    "text": "Primary sources the draft is written against\n\n\n\n\n\n\n\n\nKey\nCitation\nUsed for\n\n\n\n\nAHA/ASA-2023\nHoh BL, et al. 2023 Guideline for the Management of Patients With Aneurysmal Subarachnoid Hemorrhage. Stroke. 2023;54(7):e314–e370.\nMaster reference: BP targets, timing of securing, nimodipine, seizure prophylaxis, DCI management, hyponatremia.\n\n\nNCS-2011\nDiringer MN, et al. Critical Care Management of Patients Following Aneurysmal SAH: Recommendations from the Neurocritical Care Society’s Multidisciplinary Consensus Conference. Neurocrit Care. 2011;15:211–240.\nVolume status, CSW/SIADH, fever, anemia/transfusion, hemodynamic augmentation.\n\n\nNCS-MMM-2014\nLe Roux P, et al. Consensus Summary Statement of the International Multidisciplinary Consensus Conference on Multimodality Monitoring. Neurocrit Care. 2014;21(S2).\nTCD thresholds, cEEG for DCI, PbtO2.\n\n\nVergouwen-2010\nVergouwen MDI, et al. Definition of DCI and cerebral infarction as outcome events. Stroke. 2010;41:2391–2395.\nDCI vs vasospasm definitions.\n\n\nConnolly-2012\nConnolly ES, et al. 2012 AHA/ASA SAH guideline. Stroke. 2012;43:1711–1737.\nHistorical anchor for rebleeding epidemiology.\n\n\nBRANT-1989\nPickard JD, et al. British aneurysm nimodipine trial. BMJ. 1989;298:636–642.\nNimodipine outcome benefit.\n\n\nULTRA-2021\nPost R, et al. Ultra-early tranexamic acid after SAH (ULTRA). Lancet. 2021;397:112–118.\nAntifibrinolytics not routinely recommended.\n\n\nSTASH-2014\nKirkpatrick PJ, et al. Simvastatin in aneurysmal SAH (STASH). Lancet Neurol. 2014.\nStatins not recommended for DCI prevention.\n\n\nMASH-2\nMees SMD, et al. Magnesium for aneurysmal SAH (MASH-2). Lancet. 2012.\nIV magnesium not recommended."
+  },
+  {
+    "objectID": "sources.html#numbers-flagged-for-exact-text-check-before-sign-off",
+    "href": "sources.html#numbers-flagged-for-exact-text-check-before-sign-off",
+    "title": "Sources & content verification",
+    "section": "Numbers flagged for exact-text check before sign-off",
+    "text": "Numbers flagged for exact-text check before sign-off\n\nThe precise SBP number to display pre-securing (guideline gives a range / soft ceiling, not one value).\nDCI peak-day range (6–8 vs 7–10 across sources).\nShunt-dependence percentage to quote (published range ~8–48%).\nModified Fisher grade definitions and IVH handling.\nTransfusion hemoglobin trigger during the DCI window.\nWhether to state a nimodipine effect size at all, or just “improves outcome.”\nFamilial aneurysm screening criteria (number of affected relatives + risk factors)."
+  },
+  {
+    "objectID": "sources.html#card-checklist",
+    "href": "sources.html#card-checklist",
+    "title": "Sources & content verification",
+    "section": "Card checklist",
+    "text": "Card checklist\nTrack sign-off in the source repository (js/npr-data.js, the CARDS array). Each card’s verified field flips to true only when the row is checked. The cards currently in the tool:\nREBLEED-01, REBLEED-02, BP-01, BP-02, ANTIFIB-01, NIMO-01, NIMO-02, DCI-01, DCI-02, DCI-03, DCI-04, DCI-05, TCD-01, MMM-01, NA-01, NA-02, NA-03, CARD-01, SEIZ-01, SEIZ-02, HCP-01, HCP-02, HCP-03, EVD-01, VTE-01, ANEM-01, FISHER-01, GRADE-01, DRUG-01, COG-01, PREV-01, FUP-01."
+  }
+]
