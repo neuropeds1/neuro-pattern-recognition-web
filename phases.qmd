@@ -1,0 +1,61 @@
+---
+title: "Natural history of aneurysmal SAH"
+---
+
+::: {.npr-disclaimer}
+Educational overview. DRAFT — see [Sources](sources.qmd). Phases overlap on purpose: a
+thick-clot, poor-grade patient stays in the DCI window past day 14.
+:::
+
+The tool organizes SAH around a **time × system matrix**. Time is *day post-ictus* (day of
+hemorrhage = day 0), with a secondary clock of *day post-securing* for blood-pressure
+liberalization and VTE prophylaxis. The systems: rebleeding, hydrocephalus/EVD/ICP,
+DCI/vasospasm, sodium/volume, cardiopulmonary, fever/infection, seizure, hematologic
+(anemia/VTE), and cognition/mood/disposition.
+
+## The five phases
+
+### Phase 1 — Hyperacute / pre-securing (day 0–1)
+
+The aneurysm is not yet secured. Everything is organized around **preventing rebleeding**
+(highest risk in the first 24 h, high mortality): titratable blood-pressure control, pain and
+stimulation control, reversal of anticoagulation, and securing the aneurysm as early as
+feasible. Treat acute obstructive hydrocephalus with an EVD, but avoid aggressive CSF drainage
+before the aneurysm is secured. Expect cardiopulmonary stunning — troponin bump, QTc changes,
+non-coronary wall-motion abnormality, neurogenic pulmonary edema. Grade the patient
+(WFNS/Hunt-Hess, modified Fisher). Start nimodipine. The seizure-prophylaxis decision is made
+here — a short course or none, and not phenytoin.
+
+### Phase 2 — Early post-securing (day 1–4)
+
+Aneurysm secured. Blood-pressure goals **liberalize** — the target becomes euvolemia, *not*
+prophylactic hypervolemia. Sodium starts to drift. Establish the DCI-surveillance cadence:
+hourly exams, a baseline TCD, an agreed imaging plan. Begin pharmacologic VTE prophylaxis a set
+interval after securing. In poor-grade patients, set up multimodal monitoring (cEEG, PbtO2).
+
+### Phase 3 — DCI window (day 4–14, peak ~6–9)
+
+**Delayed cerebral ischemia** is the dominant threat. Detect it: hourly exam for a new focal
+deficit or a drop in consciousness; TCD trends; CT perfusion/CTA when the exam changes; cEEG
+(alpha-delta ratio) and PbtO2 in the patient too poor-grade to examine. Treat it: exclude the
+mimics (seizure, hydrocephalus, hyponatremia, sedation, fever), then **induced hypertension**
+first with a bedside response check, endovascular rescue (IA vasodilators, angioplasty) if
+refractory. "Triple-H" is obsolete — hemodilution and prophylactic hypervolemia are out. The
+sodium nadir and the fever peak fall in this window; keep the hemoglobin higher than the usual
+restrictive ICU trigger while DCI risk is active.
+
+### Phase 4 — Resolution (day 10–21)
+
+Vasospasm risk recedes (later in thick-clot / poor-grade patients). Nimodipine **finishes at
+day 21**. Begin the EVD wean — raise the level or clamp, watch exam / ICP / ventricle size; a
+failed wean means a VP shunt. Shunt dependence is common after IVH, poor grade, and older age —
+set expectations with the family early. Mobilize; start rehab planning.
+
+### Phase 5 — Recovery / pre-discharge (day 14–30+)
+
+Shunt if the wean failed. Taper any AED if the patient is seizure-free. **Name the cognitive,
+executive, and mood sequelae explicitly** — depression, anxiety, PTSD, and fatigue are common
+even after good motor recovery, and a patient who walks out the door can still have disabling
+executive dysfunction. Arrange follow-up vascular imaging (coil surveillance). Counsel secondary
+prevention: smoking cessation, blood-pressure control, and familial screening when criteria are
+met.

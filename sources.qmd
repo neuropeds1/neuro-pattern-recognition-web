@@ -1,0 +1,41 @@
+---
+title: "Sources & content verification"
+---
+
+::: {.npr-disclaimer}
+**Nothing on this site should be treated as verified.** Every evidence card is `verified: false`
+until a content reviewer checks it against the primary text and initials the row below.
+:::
+
+## Primary sources the draft is written against
+
+| Key | Citation | Used for |
+|---|---|---|
+| **AHA/ASA-2023** | Hoh BL, et al. 2023 Guideline for the Management of Patients With Aneurysmal Subarachnoid Hemorrhage. *Stroke.* 2023;54(7):e314–e370. | Master reference: BP targets, timing of securing, nimodipine, seizure prophylaxis, DCI management, hyponatremia. |
+| **NCS-2011** | Diringer MN, et al. Critical Care Management of Patients Following Aneurysmal SAH: Recommendations from the Neurocritical Care Society's Multidisciplinary Consensus Conference. *Neurocrit Care.* 2011;15:211–240. | Volume status, CSW/SIADH, fever, anemia/transfusion, hemodynamic augmentation. |
+| **NCS-MMM-2014** | Le Roux P, et al. Consensus Summary Statement of the International Multidisciplinary Consensus Conference on Multimodality Monitoring. *Neurocrit Care.* 2014;21(S2). | TCD thresholds, cEEG for DCI, PbtO2. |
+| **Vergouwen-2010** | Vergouwen MDI, et al. Definition of DCI and cerebral infarction as outcome events. *Stroke.* 2010;41:2391–2395. | DCI vs vasospasm definitions. |
+| **Connolly-2012** | Connolly ES, et al. 2012 AHA/ASA SAH guideline. *Stroke.* 2012;43:1711–1737. | Historical anchor for rebleeding epidemiology. |
+| **BRANT-1989** | Pickard JD, et al. British aneurysm nimodipine trial. *BMJ.* 1989;298:636–642. | Nimodipine outcome benefit. |
+| **ULTRA-2021** | Post R, et al. Ultra-early tranexamic acid after SAH (ULTRA). *Lancet.* 2021;397:112–118. | Antifibrinolytics not routinely recommended. |
+| **STASH-2014** | Kirkpatrick PJ, et al. Simvastatin in aneurysmal SAH (STASH). *Lancet Neurol.* 2014. | Statins not recommended for DCI prevention. |
+| **MASH-2** | Mees SMD, et al. Magnesium for aneurysmal SAH (MASH-2). *Lancet.* 2012. | IV magnesium not recommended. |
+
+## Numbers flagged for exact-text check before sign-off
+
+- The precise SBP number to display pre-securing (guideline gives a range / soft ceiling, not one value).
+- DCI peak-day range (6–8 vs 7–10 across sources).
+- Shunt-dependence percentage to quote (published range ~8–48%).
+- Modified Fisher grade definitions and IVH handling.
+- Transfusion hemoglobin trigger during the DCI window.
+- Whether to state a nimodipine effect size at all, or just "improves outcome."
+- Familial aneurysm screening criteria (number of affected relatives + risk factors).
+
+## Card checklist
+
+Track sign-off in the source repository (`js/npr-data.js`, the `CARDS` array). Each card's
+`verified` field flips to `true` only when the row is checked. The cards currently in the tool:
+
+REBLEED-01, REBLEED-02, BP-01, BP-02, ANTIFIB-01, NIMO-01, NIMO-02, DCI-01, DCI-02, DCI-03,
+DCI-04, DCI-05, TCD-01, MMM-01, NA-01, NA-02, NA-03, CARD-01, SEIZ-01, SEIZ-02, HCP-01,
+HCP-02, HCP-03, EVD-01, VTE-01, ANEM-01, FISHER-01, GRADE-01, DRUG-01, COG-01, PREV-01, FUP-01.

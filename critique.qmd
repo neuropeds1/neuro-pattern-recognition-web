@@ -1,0 +1,20 @@
+---
+title: "Plan critique"
+---
+
+::: {.npr-disclaimer}
+Educational use only. **Do not enter protected health information** — no names, MRNs, dates of
+birth, or other identifiers. The tutor is a teaching aid fed a deterministic model as ground
+truth; it does not issue medical orders. Always confirm with your fellow or attending.
+:::
+
+Set the patient state on the left, then either paste your assessment and plan for a critique,
+ask the tutor a focused question, or read the deterministic engine brief directly.
+
+```{=html}
+<div class="npr-layout">
+  <div id="npr-critique-panel"></div>
+  <div id="npr-critique-tabs"></div>
+</div>
+<script type="module" src="js/npr-page-critique.js"></script>
+```

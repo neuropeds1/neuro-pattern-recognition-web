@@ -1,0 +1,47 @@
+project:
+  type: website
+  resources:
+    - js
+
+website:
+  title: "Neuro Pattern Recognition"
+  description: "A day-by-day natural-history companion for neurocritical care trainees. Module 1: aneurysmal SAH."
+  favicon: favicon.ico
+  page-footer:
+    center: |
+      Neuro Pattern Recognition — educational use only. Does not replace clinical
+      judgment, attending/fellow supervision, or institutional guidance.
+      All clinical content is DRAFT pending source verification.
+  navbar:
+    background: dark
+    search: true
+    left:
+      - text: "Home"
+        href: index.qmd
+      - text: "Today on the timeline"
+        href: timeline.qmd
+      - text: "Virtual patient"
+        href: simulator.qmd
+      - text: "Plan critique"
+        href: critique.qmd
+      - text: "Evidence cards"
+        href: evidence.qmd
+      - text: "Natural history"
+        href: phases.qmd
+    right:
+      - text: "Sources"
+        href: sources.qmd
+      - text: "About"
+        href: about.qmd
+
+format:
+  html:
+    theme:
+      light: cosmo
+    css: styles.css
+    toc: true
+    grid:
+      body-width: 1000px
+
+execute:
+  echo: false

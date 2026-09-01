@@ -1,0 +1,112 @@
+/* NPR — SAH module styles ------------------------------------------------ */
+
+:root {
+  --npr-danger: #c0392b;
+  --npr-warning: #b9770e;
+  --npr-info: #1f6feb;
+  --npr-success: #1e7e45;
+  --npr-secondary: #566573;
+  --npr-border: #e2e5ea;
+  --npr-bg-soft: #f6f7f9;
+}
+
+.npr-disclaimer {
+  background: #fff8e1;
+  border: 1px solid #f0d999;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  margin: 0 0 1.2rem;
+}
+
+/* layout: state panel + output ---------------------------------------- */
+.npr-layout { display: grid; grid-template-columns: 300px 1fr; gap: 1.5rem; align-items: start; }
+@media (max-width: 860px) { .npr-layout { grid-template-columns: 1fr; } }
+
+.npr-panel { position: sticky; top: 1rem; background: var(--npr-bg-soft);
+  border: 1px solid var(--npr-border); border-radius: 10px; padding: 1rem; }
+.npr-panel h3 { margin-top: 0; font-size: 1rem; }
+.npr-field { display: block; margin-bottom: 0.7rem; font-size: 0.85rem; }
+.npr-field > span { display: block; color: #444; margin-bottom: 2px; }
+.npr-field input, .npr-field select, .npr-panel input[type=range] { width: 100%; }
+.npr-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+.npr-check { display: flex; align-items: center; gap: 6px; font-size: 0.85rem; margin-bottom: 0.55rem; }
+.npr-check input { width: auto; }
+
+/* cards & lists ----------------------------------------------------- */
+.npr-card { border: 1px solid var(--npr-border); border-radius: 10px; margin-bottom: 1rem; overflow: hidden; background: #fff; }
+.npr-card-head { background: var(--npr-bg-soft); padding: 0.55rem 0.9rem; font-weight: 600; border-bottom: 1px solid var(--npr-border); }
+.npr-card-body { padding: 0.9rem; }
+.npr-card-danger { border-color: var(--npr-danger); }
+.npr-head-danger { background: var(--npr-danger); color: #fff; }
+.npr-card-primary { border-color: var(--npr-info); }
+.npr-head-primary { background: var(--npr-info); color: #fff; }
+
+.npr-list { list-style: none; margin: 0; padding: 0; }
+.npr-list li { padding: 0.5rem 0.9rem; border-bottom: 1px solid var(--npr-border); font-size: 0.92rem; }
+.npr-list li:last-child { border-bottom: none; }
+
+.npr-chip { display: inline-block; background: #eef1f4; color: #555; border-radius: 999px;
+  font-size: 0.7rem; padding: 1px 8px; margin-right: 4px; text-transform: capitalize; }
+
+.npr-alert { border-radius: 8px; padding: 0.7rem 0.9rem; margin-bottom: 1rem; }
+.npr-alert-primary { background: #e8f0fe; border: 1px solid #b6d0f7; }
+.npr-alert-success { background: #e7f5ec; border: 1px solid #a9dcbc; }
+.npr-alert-info { background: #e8f0fe; border: 1px solid #b6d0f7; }
+.npr-alert-warning { background: #fdf3e3; border: 1px solid #f0d29a; }
+.npr-alert-danger { background: #fbeae8; border: 1px solid #eab2ab; }
+
+/* risk bars -------------------------------------------------------- */
+.npr-risk { margin-bottom: 0.9rem; }
+.npr-risk-row { display: flex; justify-content: space-between; }
+.npr-bar { background: #eceef1; border-radius: 4px; height: 8px; margin: 4px 0; overflow: hidden; }
+.npr-bar-fill { height: 100%; }
+.npr-bg-danger { background: var(--npr-danger); } .npr-text-danger { color: var(--npr-danger); }
+.npr-bg-warning { background: var(--npr-warning); } .npr-text-warning { color: var(--npr-warning); }
+.npr-bg-info { background: var(--npr-info); } .npr-text-info { color: var(--npr-info); }
+.npr-bg-success { background: var(--npr-success); } .npr-text-success { color: var(--npr-success); }
+.npr-bg-secondary { background: var(--npr-secondary); } .npr-text-secondary { color: var(--npr-secondary); }
+
+/* evidence -------------------------------------------------------- */
+.npr-evhead { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; }
+.npr-badge { display: inline-block; border-radius: 6px; font-size: 0.68rem; padding: 2px 7px; color: #fff; }
+.npr-evcard .npr-card-body p { margin: 0.25rem 0; }
+.npr-ev-controls { display: flex; gap: 1rem; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; }
+.npr-ev-controls input[type=search] { flex: 1; min-width: 200px; padding: 6px 10px; }
+
+/* helpers ------------------------------------------------------- */
+.npr-sm { font-size: 0.85rem; }
+.npr-muted { color: #6b7280; }
+.npr-strong { font-weight: 600; }
+.npr-italic { font-style: italic; }
+.npr-hidden { display: none; }
+.npr-details { border: 1px solid var(--npr-border); border-radius: 8px; padding: 0.5rem 0.8rem; margin-bottom: 1rem; }
+.npr-details summary { font-weight: 600; cursor: pointer; }
+.npr-details > div { margin-top: 0.8rem; }
+
+/* buttons & tabs ---------------------------------------------- */
+.npr-btn { border: none; border-radius: 7px; padding: 0.5rem 1rem; font-weight: 600; cursor: pointer; margin-top: 0.6rem; }
+.npr-btn-primary { background: var(--npr-info); color: #fff; }
+.npr-btn-success { background: var(--npr-success); color: #fff; }
+.npr-btn:disabled { opacity: 0.6; cursor: progress; }
+
+.npr-tabbar { display: flex; gap: 4px; border-bottom: 2px solid var(--npr-border); margin-bottom: 1rem; }
+.npr-tab { background: none; border: none; padding: 0.5rem 0.9rem; cursor: pointer; font-weight: 600; color: #6b7280; border-bottom: 2px solid transparent; margin-bottom: -2px; }
+.npr-tab-active { color: var(--npr-info); border-bottom-color: var(--npr-info); }
+
+/* simulator --------------------------------------------------- */
+.npr-sim-controls { display: flex; gap: 0.8rem; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; }
+.npr-sim-controls select { padding: 6px 10px; }
+.npr-opts { display: flex; flex-direction: column; gap: 0.3rem; margin: 0.6rem 0; }
+.npr-opt { align-items: flex-start; }
+.npr-feedback { margin-top: 1rem; }
+.npr-fb-row { margin: 0.5rem 0; }
+.npr-fb-row .npr-badge { margin: 2px 4px 2px 0; white-space: normal; }
+.npr-evolution { margin-top: 1rem; padding: 0.8rem; background: var(--npr-bg-soft); border-radius: 8px; }
+
+textarea, .npr-tabbar + div input[type=text] { width: 100%; padding: 8px 10px; border: 1px solid var(--npr-border); border-radius: 7px; font-family: inherit; }
+
+.npr-turn { padding: 0.6rem 0.8rem; border-radius: 8px; margin: 0.5rem 0; }
+.npr-turn-user { background: var(--npr-bg-soft); }
+.npr-turn-assistant { background: #fff; border: 1px solid var(--npr-border); }
+.npr-busy::after { content: " ⏳"; }

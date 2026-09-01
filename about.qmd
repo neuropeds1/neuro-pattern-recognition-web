@@ -1,0 +1,35 @@
+---
+title: "About"
+---
+
+**Neuro Pattern Recognition (NPR)** is a companion for pattern recognition in core
+neurocritical care diagnoses, built in the spirit of the Neurocritical Care Society's ENLS but
+organized around a disease's *natural history* rather than the first hour of resuscitation.
+Aneurysmal subarachnoid hemorrhage is the prototype module.
+
+## Design
+
+Two layers:
+
+- **A deterministic engine** (`js/npr-*.js`) — a transparent time × system model of SAH natural
+  history that runs entirely in the browser. It scores which complication domains dominate on a
+  given day (rebleeding collapses once the aneurysm is secured; DCI is a skew-bell peaking day
+  6–9, scaled by modified Fisher and IVH; hyponatremia salience jumps when the sodium is already
+  low; and so on), then assembles the day's assessments, thresholds, pearls, and red flags from
+  a matrix of timeline entries. It is auditable and works offline.
+- **An AI tutor** — a guard-railed Claude model reached through a Firebase Cloud Function proxy
+  (so no API key is ever in the browser), *fed the deterministic engine's brief as ground
+  truth* plus a retrieved slice of the evidence cards. It gives Socratic feedback on a trainee's
+  plan and answers focused questions. It is instructed to teach, not to order, and to name what
+  to escalate and what to discuss with the team. The rest of the app works without it.
+
+## Status
+
+Prototype. **All clinical content is DRAFT** pending verification against primary sources —
+see [Sources](sources.qmd). The reference specification (including a fuller design document and
+an R implementation of the same engine) lives in a separate repository.
+
+## Not a medical device
+
+Educational use only. Not a substitute for attending or fellow supervision, institutional
+protocols, or clinical judgment. Do not enter protected health information.

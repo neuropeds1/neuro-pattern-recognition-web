@@ -1,0 +1,17 @@
+---
+title: "Today on the timeline"
+---
+
+::: {.npr-disclaimer}
+Educational use only. No identifiers. The output below is a **deterministic** model of SAH
+natural history — a teaching heuristic, not a directive. Verify against your institution's
+protocols and the primary literature ([Sources](sources.qmd)).
+:::
+
+```{=html}
+<div class="npr-layout">
+  <div id="npr-timeline-panel"></div>
+  <div id="npr-timeline-out"></div>
+</div>
+<script type="module" src="js/npr-page-timeline.js"></script>
+```

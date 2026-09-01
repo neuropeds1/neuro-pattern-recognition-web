@@ -1,0 +1,17 @@
+---
+title: "Virtual patient"
+---
+
+::: {.npr-disclaimer}
+Educational use only. These are **scripted teaching cases**, not real patients. The scoring
+rubric reflects a draft reading of the literature ([Sources](sources.qmd)) — treat disagreements
+with your attending as the authority.
+:::
+
+Advance the case day by day. Pick every action you would take, order, or actively consider,
+then submit to see the natural history and your score.
+
+```{=html}
+<div id="npr-sim-out"></div>
+<script type="module" src="js/npr-page-simulator.js"></script>
+```

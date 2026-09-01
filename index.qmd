@@ -1,0 +1,38 @@
+---
+title: "Neuro Pattern Recognition"
+subtitle: "A day-by-day natural-history companion for the NCCU rotation"
+---
+
+::: {.npr-disclaimer}
+**Educational use only.** Not a medical device. Does not replace attending or fellow
+supervision, institutional protocols, or clinical judgment. **Do not enter protected health
+information.** All clinical content is **DRAFT** pending source verification — see [Sources](sources.qmd).
+:::
+
+The Neurocritical Care Society's **ENLS** answers *"what do I do in the first hour."* This tool
+addresses a different gap: a trainee two weeks into an NCCU rotation can examine a patient and
+list problems, but does not yet carry the **day-by-day mental model** of what a given
+subarachnoid hemorrhage patient is most likely to do next — the anticipatory model that a
+fellowship builds slowly by osmosis.
+
+**Module 1 is aneurysmal SAH.** The structure (a time × system matrix) is built so that status
+epilepticus, TBI, ICH, and others can become sibling modules later.
+
+## The four modes
+
+| | |
+|---|---|
+| **[Today on the timeline](timeline.qmd)** | Enter a patient's day post-ictus plus a few anchors (grade, modified Fisher, IVH, aneurysm secured, EVD, Na, Hgb). Get where they sit on the natural-history curve, the risks that dominate *today* ranked by salience, targeted assessments, decision thresholds, common trainee errors, red flags, and the evidence behind each. |
+| **[Virtual patient](simulator.qmd)** | Advance a scripted SAH patient day by day. Each day: a vignette, a menu of actions, then the natural history is revealed and your choices are scored against a teaching rubric. |
+| **[Plan critique](critique.qmd)** | Type your assessment and plan for the day. A guard-railed AI tutor critiques it against the deterministic engine and the evidence — emphasizing *anticipatory* gaps ("you did not mention that day 6 is the start of the DCI window"). |
+| **[Evidence cards](evidence.qmd)** | The curated claim / threshold / citation cards that back every recommendation. |
+
+## How it is built
+
+Two layers, deliberately:
+
+1. A **deterministic engine** — a transparent, auditable model of SAH natural history that runs
+   entirely in your browser. No server, no cost, works offline. This is the safety-critical core.
+2. An **AI tutor layer** — a guard-railed Claude model, called through a server-side proxy so no
+   key is exposed, and *fed the deterministic engine's output as ground truth*. It teaches; it
+   does not issue orders. The rest of the app works without it.

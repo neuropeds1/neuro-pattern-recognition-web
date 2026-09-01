@@ -1,0 +1,15 @@
+---
+title: "Evidence cards"
+---
+
+::: {.npr-disclaimer}
+**Every card below is an unverified draft.** They are written against the AHA/ASA 2023 SAH
+guideline and Neurocritical Care Society statements but have not been checked against the
+primary text. Do not rely on the specific numbers until the [Sources](sources.qmd) checklist
+is signed off.
+:::
+
+```{=html}
+<div id="npr-evidence-out"></div>
+<script type="module" src="js/npr-page-evidence.js"></script>
+```

@@ -1,0 +1,10 @@
+/.quarto/
+/_site/
+/_freeze/
+functions/node_modules/
+functions/.env
+.DS_Store
+*.log
+.firebase/
+
+**/*.quarto_ipynb
