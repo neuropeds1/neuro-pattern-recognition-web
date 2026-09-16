@@ -149,6 +149,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#primary-sources-the-draft-is-written-against" id="toc-primary-sources-the-draft-is-written-against" class="nav-link active" data-scroll-target="#primary-sources-the-draft-is-written-against">Primary sources the draft is written against</a></li>
   <li><a href="#numbers-flagged-for-exact-text-check-before-sign-off" id="toc-numbers-flagged-for-exact-text-check-before-sign-off" class="nav-link" data-scroll-target="#numbers-flagged-for-exact-text-check-before-sign-off">Numbers flagged for exact-text check before sign-off</a></li>
   <li><a href="#card-checklist" id="toc-card-checklist" class="nav-link" data-scroll-target="#card-checklist">Card checklist</a></li>
+  <li><a href="#newly-added-needs-a-first-pass-2026-09-15" id="toc-newly-added-needs-a-first-pass-2026-09-15" class="nav-link" data-scroll-target="#newly-added-needs-a-first-pass-2026-09-15">Newly added, needs a first pass (2026-09-15)</a></li>
   </ul>
 </nav>
     </div>
@@ -256,7 +257,14 @@ ul.task-list li input[type="checkbox"] {
 <section id="card-checklist" class="level2">
 <h2 class="anchored" data-anchor-id="card-checklist">Card checklist</h2>
 <p>Track sign-off in the source repository (<code>js/npr-data.js</code>, the <code>CARDS</code> array). Each card’s <code>verified</code> field flips to <code>true</code> only when the row is checked. The cards currently in the tool:</p>
-<p>REBLEED-01, REBLEED-02, BP-01, BP-02, ANTIFIB-01, NIMO-01, NIMO-02, DCI-01, DCI-02, DCI-03, DCI-04, DCI-05, TCD-01, MMM-01, NA-01, NA-02, NA-03, CARD-01, SEIZ-01, SEIZ-02, HCP-01, HCP-02, HCP-03, EVD-01, VTE-01, ANEM-01, FISHER-01, GRADE-01, DRUG-01, COG-01, PREV-01, FUP-01.</p>
+<p>REBLEED-01, REBLEED-02, BP-01, BP-02, ANTIFIB-01, NIMO-01, NIMO-02, DCI-01, DCI-02, DCI-03, DCI-04, DCI-05, TCD-01, TCD-02, FEVER-01, MMM-01, NA-01, NA-02, NA-03, CARD-01, SEIZ-01, SEIZ-02, HCP-01, HCP-02, HCP-03, EVD-01, VTE-01, ANEM-01, FISHER-01, GRADE-01, DRUG-01, COG-01, PREV-01, FUP-01.</p>
+</section>
+<section id="newly-added-needs-a-first-pass-2026-09-15" class="level2">
+<h2 class="anchored" data-anchor-id="newly-added-needs-a-first-pass-2026-09-15">Newly added, needs a first pass (2026-09-15)</h2>
+<ul>
+<li><strong>TCD-02</strong> (Lindegaard ratio cutoffs) and <strong>FEVER-01</strong> (Tmax/WBC thresholds tied to DCI surveillance) are freshly drafted, not yet cross-checked against NCS-MMM-2014 / AHA-ASA-2023.</li>
+<li>The salience boosts these numbers drive (in <code>js/npr-data.js</code>: <code>dci</code>, <code>infection</code>, <code>sodium</code>, <code>seizure</code>) are illustrative thresholds (e.g.&nbsp;Lindegaard ≥3/≥6, Tmax ≥38.0/38.3°C, WBC ≥12/15 k/µL, a fixed +0.15 bump for a “trending down” GCS/Na or “trending up” Tmax/WBC/ Lindegaard) chosen to be directionally sensible, not fit to outcome data — tune the exact cutoffs and bump sizes once reviewed.</li>
+</ul>
 
 
 </section>
@@ -335,7 +343,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/neuropeds1\.github\.io\/neuro-pattern-recognition-web\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

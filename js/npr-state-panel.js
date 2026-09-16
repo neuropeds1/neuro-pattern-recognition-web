@@ -69,6 +69,16 @@ const hchk = (id, label, checked) =>
     h("input", { id, type: "checkbox", ...(checked ? { checked: "checked" } : {}) }),
     h("span", {}, label));
 
+// number + a compact trend selector (last ~48 h), sharing one label — for
+// values where the direction matters as much as the point-in-time number.
+const TREND_OPTS = [["", "—"], ["up", "↑"], ["flat", "→"], ["down", "↓"]];
+const hnumtrend = (numId, trendId, label) =>
+  h("div", { class: "npr-hfield" }, h("span", {}, label),
+    h("div", { class: "npr-hpair" },
+      h("input", { id: numId, type: "number", step: "any", placeholder: "—" }),
+      h("select", { id: trendId, class: "npr-trend-sel", title: "trend over the last ~48 h" },
+        TREND_OPTS.map(([v, t]) => h("option", { value: v }, t)))));
+
 export function buildStatePanelBar(mount, onChange) {
   const dayOut = h("output", { id: "npr-day-val" }, "6");
   const daySlider = h("input", { id: "npr-day", type: "range", min: "0", max: "30", step: "1", value: "6" });
@@ -84,15 +94,25 @@ export function buildStatePanelBar(mount, onChange) {
     hchk("npr-secured", "Secured", true),
     hsel("npr-method", "Method", [["coil", "coil"], ["clip", "clip"], ["", "—"]], "coil"),
     hchk("npr-evd", "EVD", false),
-    hnum("npr-na", "Na"),
+    hnumtrend("npr-na", "npr-na-trend", "Na"),
     hnum("npr-hgb", "Hgb"),
     hchk("npr-nimo", "Nimodipine", true),
     hnum("npr-age", "Age"));
 
+  const trendBar = h("div", { class: "npr-statebar npr-statebar-trend" },
+    hnumtrend("npr-gcs", "npr-gcs-trend", "GCS"),
+    hnumtrend("npr-tmax", "npr-tmax-trend", "Tmax (°C)"),
+    hnumtrend("npr-wbc", "npr-wbc-trend", "WBC (k/µL)"),
+    hnumtrend("npr-lind", "npr-lind-trend", "Lindegaard ratio"),
+    hsel("npr-io-trend", "Net I/O (48h)",
+      [["", "—"], ["up", "↑ more positive"], ["flat", "→ stable"], ["down", "↓ increasingly negative"]]));
+
   const wrap = h("div", { class: "npr-statebar-wrap" },
     bar,
+    trendBar,
     h("p", { class: "npr-muted npr-sm npr-statebar-note" },
-      "No identifiers. This drives a deterministic model of SAH natural history."));
+      "No identifiers. Trend fields (↑/→/↓) describe direction over roughly the last 48 h. ",
+      "This drives a deterministic model of SAH natural history."));
 
   mount.appendChild(wrap);
   wrap.addEventListener("input", () => onChange(readStatePanel()));
@@ -109,7 +129,12 @@ export function readStatePanel() {
     ivh: b("npr-ivh"),
     secured: b("npr-secured"), secureMethod: v("npr-method") || null,
     evd: b("npr-evd"),
-    na: v("npr-na"), hgb: v("npr-hgb"),
+    na: v("npr-na"), naTrend: v("npr-na-trend"), hgb: v("npr-hgb"),
     onNimodipine: b("npr-nimo"), age: v("npr-age"),
+    gcs: v("npr-gcs"), gcsTrend: v("npr-gcs-trend"),
+    tmax: v("npr-tmax"), tmaxTrend: v("npr-tmax-trend"),
+    wbc: v("npr-wbc"), wbcTrend: v("npr-wbc-trend"),
+    lindegaard: v("npr-lind"), lindegaardTrend: v("npr-lind-trend"),
+    ioTrend: v("npr-io-trend"),
   };
 }
