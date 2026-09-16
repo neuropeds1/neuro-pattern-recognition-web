@@ -13,6 +13,8 @@ const numOrNaN = (x) => {
   const n = Number(x);
   return Number.isFinite(n) ? n : NaN;
 };
+// "up" | "down" | "flat" | null — anything else (e.g. "") normalizes to null.
+const trendOrNull = (x) => (x === "up" || x === "down" || x === "flat" ? x : null);
 
 // Canonical state with defaults.
 export function sahState(o = {}) {
@@ -32,6 +34,13 @@ export function sahState(o = {}) {
     evd, evdDays, na: numOrNaN(o.na), hgb: numOrNaN(o.hgb),
     onNimodipine: o.onNimodipine == null ? null : !!o.onNimodipine,
     age: numOrNaN(o.age),
+    // trending labs/vitals — point-in-time value + direction over the last ~48 h
+    gcs: numOrNaN(o.gcs), gcsTrend: trendOrNull(o.gcsTrend),
+    tmax: numOrNaN(o.tmax), tmaxTrend: trendOrNull(o.tmaxTrend),
+    wbc: numOrNaN(o.wbc), wbcTrend: trendOrNull(o.wbcTrend),
+    lindegaard: numOrNaN(o.lindegaard), lindegaardTrend: trendOrNull(o.lindegaardTrend),
+    naTrend: trendOrNull(o.naTrend),
+    ioTrend: trendOrNull(o.ioTrend),
   };
 }
 

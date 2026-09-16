@@ -17,3 +17,15 @@ protocols and the primary literature ([Sources](sources.qmd)).
 <div id="npr-timeline-out"></div>
 <script type="module" src="js/npr-page-timeline.js"></script>
 ```
+
+## Reading the coordinated pattern
+
+Several signals tend to move **together** around day 7–14: fever and leukocytosis often peak,
+and vasospasm/DCI risk (rising TCD velocities, a rising Lindegaard ratio) is at its highest. In
+that same window, watch for things trending the **other** way — serum sodium, GCS, and net
+fluid balance often drift down as cerebral salt wasting and DCI take hold. Enter today's values
+and 48-hour trends in the bar above to see how this patient compares.
+
+A patient whose numbers are **not** moving this way deserves a second look at the differential —
+fever without leukocytosis, or a falling GCS without any of the rest, points away from the
+textbook pattern and toward something else (seizure, a new bleed, a med effect).

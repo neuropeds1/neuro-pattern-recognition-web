@@ -88,13 +88,22 @@ export const DOMAINS = {
     salience(s) {
       const d = finite(s.dayPostIctus) ? s.dayPostIctus : 0;
       const base = dayBell(d, 3, 6, 9, 21);
-      const score = clamp(base * mfisherFactor(s.mfisher) + (s.ivh ? 0.1 : 0) + gradeBump(s));
+      const lind = s.lindegaard;
+      const lindBump = !finite(lind) ? 0 : lind >= 6 ? 0.35 : lind >= 3 ? 0.2 : 0;
+      const lindRiseBump = lindBump > 0 && s.lindegaardTrend === "up" ? 0.1 : 0;
+      const gcsDropBump = s.gcsTrend === "down" ? 0.15 : 0;
+      const score = clamp(base * mfisherFactor(s.mfisher) + (s.ivh ? 0.1 : 0) + gradeBump(s)
+        + lindBump + lindRiseBump + gcsDropBump);
       const phaseTxt = d < 3 ? "before the DCI window opens (day ~4)"
         : d <= 9 ? "in the peak DCI window (day ~6–9)"
         : d <= 14 ? "in the late DCI window (tapering)"
         : "past the usual DCI window (later if thick clot / poor grade)";
-      return { score, rationale:
-        `Day ${d} — ${phaseTxt}. Modified Fisher ${finite(s.mfisher) ? s.mfisher : "?"}${s.ivh ? " with IVH" : ""}. Any new focal deficit or drop in exam is DCI until proven otherwise.` };
+      const bits = [`Day ${d} — ${phaseTxt}.`,
+        `Modified Fisher ${finite(s.mfisher) ? s.mfisher : "?"}${s.ivh ? " with IVH" : ""}.`];
+      if (finite(lind)) bits.push(`Lindegaard ratio ${lind}${lindBump >= 0.35 ? " (severe range)" : lindBump >= 0.2 ? " (mild-moderate range)" : ""}${lindRiseBump ? ", rising" : ""}.`);
+      if (s.gcsTrend === "down") bits.push("GCS trending down over the last ~48 h — DCI until proven otherwise.");
+      bits.push("Any new focal deficit or drop in exam is DCI until proven otherwise.");
+      return { score, rationale: bits.join(" ") };
     },
   },
   sodium: {
@@ -104,8 +113,12 @@ export const DOMAINS = {
       const base = dayBell(d, 1, 4, 10, 16);
       const na = s.na;
       const naBump = !finite(na) ? 0 : na < 130 ? 0.5 : na < 135 ? 0.3 : 0;
-      return { score: clamp(base + naBump), rationale:
-        `Hyponatremia (CSW or SIADH) typically emerges day 2–10${finite(na) ? `; current Na ${na}` : ""}. Assess volume status before acting — do NOT fluid-restrict a hypovolemic patient in the DCI window.` };
+      const naTrendBump = s.naTrend === "down" ? 0.15 : 0;
+      const ioTrendBump = s.ioTrend === "down" ? 0.15 : 0;
+      const bits = [`Hyponatremia (CSW or SIADH) typically emerges day 2–10${finite(na) ? `; current Na ${na}` : ""}${s.naTrend === "down" ? ", trending down" : ""}.`];
+      if (s.ioTrend === "down") bits.push("Net fluid balance increasingly negative — supports cerebral salt wasting over SIADH.");
+      bits.push("Assess volume status before acting — do NOT fluid-restrict a hypovolemic patient in the DCI window.");
+      return { score: clamp(base + naBump + naTrendBump + ioTrendBump), rationale: bits.join(" ") };
     },
   },
   cardiopulmonary: {
@@ -122,8 +135,16 @@ export const DOMAINS = {
       let d = finite(s.dayPostIctus) ? s.dayPostIctus : 0;
       let evdD = s.evdDays;
       if (!finite(evdD)) evdD = s.evd ? d : 0;
-      return { score: clamp(0.15 + 0.03 * d + 0.03 * evdD), rationale:
-        `Fever burden rises with hospital day${evdD > 0 ? ` and EVD duration (~${evdD} d)` : ""}. Central fever is a diagnosis of exclusion; include ventriculitis once the EVD has been in > 5 days.` };
+      const tmax = s.tmax, wbc = s.wbc;
+      const tmaxBump = !finite(tmax) ? 0 : tmax >= 38.3 ? 0.25 : tmax >= 38.0 ? 0.15 : 0;
+      const wbcBump = !finite(wbc) ? 0 : wbc >= 15 ? 0.25 : wbc >= 12 ? 0.15 : 0;
+      const trendBump = (s.tmaxTrend === "up" ? 0.08 : 0) + (s.wbcTrend === "up" ? 0.08 : 0);
+      const bits = [`Fever/leukocytosis burden rises with hospital day${evdD > 0 ? ` and EVD duration (~${evdD} d)` : ""}, and typically clusters with the DCI window (day ~7–14).`];
+      if (finite(tmax)) bits.push(`Tmax ${tmax}°C${s.tmaxTrend === "up" ? " and rising" : ""}.`);
+      if (finite(wbc)) bits.push(`WBC ${wbc} k/µL${s.wbcTrend === "up" ? " and rising" : ""}.`);
+      bits.push("Central fever is a diagnosis of exclusion; include ventriculitis once the EVD has been in > 5 days, and note fever/leukocytosis can both mimic and coexist with DCI.");
+      return { score: clamp(0.15 + 0.03 * d + 0.03 * evdD + tmaxBump + wbcBump + trendBump),
+        rationale: bits.join(" ") };
     },
   },
   seizure: {
@@ -132,8 +153,9 @@ export const DOMAINS = {
       const d = finite(s.dayPostIctus) ? s.dayPostIctus : 0;
       const early = dayBell(d, -1, 0, 2, 5);
       const poor = gradeBump(s) * 2;
-      return { score: clamp(Math.max(early * 0.6, poor)), rationale:
-        "Onset seizures cluster at ictus. In a poor-grade patient whose exam is worse than the imaging explains, think nonconvulsive seizure — low threshold for continuous EEG." };
+      const gcsDropBump = s.gcsTrend === "down" ? 0.08 : 0;
+      return { score: clamp(Math.max(early * 0.6, poor) + gcsDropBump), rationale:
+        `Onset seizures cluster at ictus. In a poor-grade patient whose exam is worse than the imaging explains${s.gcsTrend === "down" ? ", or whose GCS is trending down," : ""} think nonconvulsive seizure — low threshold for continuous EEG.` };
     },
   },
   hematology: {
@@ -232,7 +254,7 @@ export const TIMELINE = [
       "Do not start induced hypertension in a patient whose aneurysm is not secured"],
     redFlags: ["New hemiparesis / aphasia / declining GCS not explained by a mimic",
       "Failure to respond to a blood-pressure challenge -> escalate to endovascular"],
-    evidence: ["DCI-01", "DCI-02", "DCI-03", "DCI-04", "DCI-05", "TCD-01", "MMM-01", "ANEM-01", "DRUG-01"] }),
+    evidence: ["DCI-01", "DCI-02", "DCI-03", "DCI-04", "DCI-05", "TCD-01", "TCD-02", "MMM-01", "ANEM-01", "DRUG-01"] }),
 
   tl("sodium", 2, 12,
     "Hyponatremia (cerebral salt wasting or SIADH) emerges here, often day 2–10.", {
@@ -270,7 +292,7 @@ export const TIMELINE = [
     pearls: ["Central (neurogenic) fever is a diagnosis of exclusion — work it up before you accept it",
       "A blood-contaminated tap needs the cell-count correction before you call it ventriculitis"],
     redFlags: ["New meningismus, worsening exam with fever, purulent EVD output"],
-    evidence: ["EVD-01", "DCI-01"] }),
+    evidence: ["EVD-01", "DCI-01", "FEVER-01"] }),
 
   tl("seizure", 0, 3,
     "Onset seizures cluster around ictus; the prophylaxis decision is made now.", {
@@ -441,6 +463,15 @@ export const CARDS = [
   card("FUP-01", "Follow-up vascular imaging",
     "Arrange follow-up vascular imaging after coiling to surveil for aneurysm recurrence or coil compaction; timing per neurosurgery.",
     { source: "AHA/ASA-2023" }),
+  card("TCD-02", "Lindegaard ratio interpretation",
+    "The Lindegaard ratio (MCA mean velocity / extracranial ICA mean velocity) distinguishes true vasospasm from hyperemia; commonly cited cutoffs are a ratio > 3 for mild-to-moderate and > 6 for severe vasospasm.",
+    { number: "ratio > 3 mild-moderate; > 6 severe (verify exact cutoffs)", source: "NCS-MMM-2014",
+      caveats: "Cutoffs vary by lab and reference range; a rising trend matters as much as a single value." }),
+  card("FEVER-01", "Fever / leukocytosis and DCI",
+    "Fever and leukocytosis are common in the DCI window, can both mimic and coexist with infection, and warrant both an infectious workup and closer DCI surveillance rather than either alone.",
+    { number: "commonly flagged at Tmax ≥ 38.3°C / WBC ≥ 15 k/µL (verify institutional thresholds)",
+      source: "AHA/ASA-2023; NCS-2011",
+      caveats: "Central (neurogenic) fever is a diagnosis of exclusion — an infectious source must still be sought." }),
 ];
 
 const CARD_INDEX = Object.fromEntries(CARDS.map((c) => [c.id, c]));

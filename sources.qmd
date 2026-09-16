@@ -37,5 +37,16 @@ Track sign-off in the source repository (`js/npr-data.js`, the `CARDS` array). E
 `verified` field flips to `true` only when the row is checked. The cards currently in the tool:
 
 REBLEED-01, REBLEED-02, BP-01, BP-02, ANTIFIB-01, NIMO-01, NIMO-02, DCI-01, DCI-02, DCI-03,
-DCI-04, DCI-05, TCD-01, MMM-01, NA-01, NA-02, NA-03, CARD-01, SEIZ-01, SEIZ-02, HCP-01,
-HCP-02, HCP-03, EVD-01, VTE-01, ANEM-01, FISHER-01, GRADE-01, DRUG-01, COG-01, PREV-01, FUP-01.
+DCI-04, DCI-05, TCD-01, TCD-02, FEVER-01, MMM-01, NA-01, NA-02, NA-03, CARD-01, SEIZ-01,
+SEIZ-02, HCP-01, HCP-02, HCP-03, EVD-01, VTE-01, ANEM-01, FISHER-01, GRADE-01, DRUG-01,
+COG-01, PREV-01, FUP-01.
+
+## Newly added, needs a first pass (2026-09-15)
+
+- **TCD-02** (Lindegaard ratio cutoffs) and **FEVER-01** (Tmax/WBC thresholds tied to DCI
+  surveillance) are freshly drafted, not yet cross-checked against NCS-MMM-2014 / AHA-ASA-2023.
+- The salience boosts these numbers drive (in `js/npr-data.js`: `dci`, `infection`, `sodium`,
+  `seizure`) are illustrative thresholds (e.g. Lindegaard ≥3/≥6, Tmax ≥38.0/38.3°C, WBC
+  ≥12/15 k/µL, a fixed +0.15 bump for a "trending down" GCS/Na or "trending up" Tmax/WBC/
+  Lindegaard) chosen to be directionally sensible, not fit to outcome data — tune the exact
+  cutoffs and bump sizes once reviewed.
