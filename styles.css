@@ -110,3 +110,47 @@ textarea, .npr-tabbar + div input[type=text] { width: 100%; padding: 8px 10px; b
 .npr-turn-user { background: var(--npr-bg-soft); }
 .npr-turn-assistant { background: #fff; border: 1px solid var(--npr-border); }
 .npr-busy::after { content: " ⏳"; }
+
+/* horizontal patient-state bar (Timeline page) ------------------------- */
+.npr-statebar-wrap {
+  background: var(--npr-bg-soft); border: 1px solid var(--npr-border);
+  border-radius: 10px; padding: 0.9rem 1.1rem 0.7rem; margin-bottom: 1.4rem;
+}
+.npr-statebar { display: flex; flex-wrap: wrap; gap: 0.8rem 1.5rem; align-items: flex-end; }
+.npr-hfield { display: flex; flex-direction: column; gap: 3px; font-size: 0.8rem; }
+.npr-hfield > span { color: #444; white-space: nowrap; }
+.npr-hfield select, .npr-hfield input[type="number"] { padding: 4px 6px; font-size: 0.85rem; width: 92px; }
+.npr-hfield-wide { flex: 1 1 260px; min-width: 240px; }
+.npr-hfield-wide input[type="range"] { width: 100%; }
+.npr-hcheck { display: flex; align-items: center; gap: 5px; font-size: 0.82rem; padding-bottom: 5px; white-space: nowrap; }
+.npr-hcheck input { width: auto; }
+.npr-statebar-note { margin: 0.6rem 0 0; }
+
+/* dominant risks | red flags, side by side --------------------------- */
+.npr-toprow { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; align-items: start; }
+.npr-toprow > .npr-card { margin-bottom: 0; }
+@media (max-width: 720px) { .npr-toprow { grid-template-columns: 1fr; } }
+
+/* domain-grouped bullet cards: column header per domain, bullets under -- */
+.npr-dgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1rem 1.7rem; }
+.npr-dgroup-head {
+  display: inline-block; font-weight: 700; font-size: 0.8rem; text-transform: uppercase;
+  letter-spacing: 0.02em; border-bottom: 2px solid currentColor; padding-bottom: 3px; margin-bottom: 0.4rem;
+}
+.npr-dgroup-list { list-style: none; margin: 0; padding: 0; }
+.npr-dgroup-list li {
+  padding: 0.22rem 0 0.22rem 0.9rem; border-bottom: none; font-size: 0.88rem;
+  line-height: 1.35; position: relative;
+}
+.npr-dgroup-list li::before { content: "–"; position: absolute; left: 0; color: #9aa3ad; }
+
+/* trend chart ------------------------------------------------------- */
+.npr-chart-caption { margin: 0 0 0.6rem; }
+.npr-chart-svg { width: 100%; height: auto; display: block; }
+.npr-chart-legend {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 0.35rem 1.2rem; margin-top: 0.8rem; font-size: 0.8rem;
+}
+.npr-chart-legend-row { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
+.npr-chart-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+.npr-chart-soon { font-weight: 700; }
