@@ -1,6 +1,9 @@
 // npr-render.js -----------------------------------------------------------
 // Tiny DOM helpers + shared renderers (brief, evidence cards).
 
+import { DOMAINS } from "./npr-data.js";
+import { renderTrendChart } from "./npr-chart.js";
+
 export function h(tag, attrs = {}, ...kids) {
   const el = document.createElement(tag);
   for (const [k, v] of Object.entries(attrs || {})) {
@@ -33,14 +36,27 @@ function salienceBar(score) {
     h("div", { class: `npr-bar-fill npr-bg-${cls}`, style: `width:${pct}%` }));
 }
 
-function bulletCard(title, items) {
-  if (!items || items.length === 0) return null;
-  return h("div", { class: "npr-card" },
-    h("div", { class: "npr-card-head" }, title),
-    h("ul", { class: "npr-list" },
-      items.map((it) => h("li", {},
-        it.domain ? h("span", { class: "npr-chip" }, it.domain) : null,
-        " " + (it.text || it)))));
+// Group {domain, text} items under their domain label, in first-seen order.
+function domainGroupBlocks(items) {
+  if (!items || items.length === 0) return [];
+  const order = [];
+  const groups = new Map();
+  for (const it of items) {
+    const key = (it && it.domain) || "";
+    if (!groups.has(key)) { groups.set(key, []); order.push(key); }
+    groups.get(key).push(it && it.text != null ? it.text : it);
+  }
+  return order.map((key) => h("div", { class: "npr-dgroup" },
+    h("span", { class: `npr-dgroup-head npr-text-${accent(key)}` }, DOMAINS[key]?.label || key || "General"),
+    h("ul", { class: "npr-dgroup-list" }, groups.get(key).map((t) => h("li", {}, t)))));
+}
+
+function domainGroupedCard(title, items, cardClass = "npr-card", headClass = "npr-card-head") {
+  const blocks = domainGroupBlocks(items);
+  if (blocks.length === 0) return null;
+  return h("div", { class: cardClass },
+    h("div", { class: headClass }, title),
+    h("div", { class: "npr-card-body npr-dgrid" }, blocks));
 }
 
 export function evidenceCardEl(c, { compact = false } = {}) {
@@ -59,6 +75,7 @@ export function evidenceCardEl(c, { compact = false } = {}) {
 
 export function renderBrief(brief) {
   const b = brief;
+
   const risksEl = h("div", { class: "npr-card" },
     h("div", { class: "npr-card-head" }, "Dominant risks today"),
     h("div", { class: "npr-card-body" },
@@ -69,13 +86,14 @@ export function renderBrief(brief) {
         salienceBar(r.score),
         h("div", { class: "npr-sm" }, r.rationale)))));
 
-  const redFlagsEl = b.redFlags.length
-    ? h("div", { class: "npr-card npr-card-danger" },
-        h("div", { class: "npr-card-head npr-head-danger" }, "Red flags — escalate"),
-        h("ul", { class: "npr-list" },
-          b.redFlags.map((f) => h("li", {},
-            h("span", { class: "npr-chip" }, f.domain), " " + f.text))))
-    : null;
+  const redFlagsEl = domainGroupedCard("Red flags — escalate", b.redFlags,
+    "npr-card npr-card-danger", "npr-card-head npr-head-danger");
+
+  const topCards = [risksEl, redFlagsEl].filter(Boolean);
+  const topRow = h("div", {
+    class: "npr-toprow",
+    style: topCards.length > 1 ? "" : "grid-template-columns:1fr;",
+  }, topCards);
 
   const rulesEl = b.rules.length
     ? h("div", { class: "npr-card" },
@@ -96,12 +114,12 @@ export function renderBrief(brief) {
     h("div", { class: "npr-alert npr-alert-primary" },
       h("div", { class: "npr-strong" }, b.curveLine),
       h("div", { class: "npr-sm" }, b.phaseSummary)),
-    risksEl,
-    bulletCard("Anticipate today", b.anticipate),
-    bulletCard("Assess today", b.assess),
-    bulletCard("Decision thresholds / triggers", b.thresholds),
-    bulletCard("Common trainee errors / pearls", b.pearls),
-    redFlagsEl,
+    renderTrendChart(b.state),
+    topRow,
+    domainGroupedCard("Anticipate today", b.anticipate),
+    domainGroupedCard("Assess today", b.assess),
+    domainGroupedCard("Decision thresholds / triggers", b.thresholds),
+    domainGroupedCard("Common trainee errors / pearls", b.pearls),
     rulesEl,
     evEl);
 }

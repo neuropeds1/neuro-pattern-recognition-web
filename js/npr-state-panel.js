@@ -50,6 +50,56 @@ export function buildStatePanel(mount, onChange) {
   onChange(readStatePanel());
 }
 
+// ---- horizontal bar variant (Timeline page: full-width, under the disclaimer) --
+
+const hsel = (id, label, opts, value = "") =>
+  h("label", { class: "npr-hfield" }, h("span", {}, label),
+    h("select", { id },
+      opts.map((o) => {
+        const [v, t] = Array.isArray(o) ? o : [String(o), String(o)];
+        return h("option", { value: v, ...(v === value ? { selected: "selected" } : {}) }, t);
+      })));
+
+const hnum = (id, label) =>
+  h("label", { class: "npr-hfield" }, h("span", {}, label),
+    h("input", { id, type: "number", step: "any", placeholder: "—" }));
+
+const hchk = (id, label, checked) =>
+  h("label", { class: "npr-hcheck" },
+    h("input", { id, type: "checkbox", ...(checked ? { checked: "checked" } : {}) }),
+    h("span", {}, label));
+
+export function buildStatePanelBar(mount, onChange) {
+  const dayOut = h("output", { id: "npr-day-val" }, "6");
+  const daySlider = h("input", { id: "npr-day", type: "range", min: "0", max: "30", step: "1", value: "6" });
+  daySlider.addEventListener("input", () => { dayOut.textContent = daySlider.value; });
+
+  const bar = h("div", { class: "npr-statebar" },
+    h("label", { class: "npr-hfield npr-hfield-wide" },
+      h("span", {}, "Day post-ictus: ", h("b", {}, dayOut)), daySlider),
+    hsel("npr-wfns", "WFNS", [["", "—"], "1", "2", "3", "4", "5"]),
+    hsel("npr-hh", "Hunt-Hess", [["", "—"], "1", "2", "3", "4", "5"]),
+    hsel("npr-mfisher", "mod. Fisher", [["", "—"], "0", "1", "2", "3", "4"]),
+    hchk("npr-ivh", "IVH", false),
+    hchk("npr-secured", "Secured", true),
+    hsel("npr-method", "Method", [["coil", "coil"], ["clip", "clip"], ["", "—"]], "coil"),
+    hchk("npr-evd", "EVD", false),
+    hnum("npr-na", "Na"),
+    hnum("npr-hgb", "Hgb"),
+    hchk("npr-nimo", "Nimodipine", true),
+    hnum("npr-age", "Age"));
+
+  const wrap = h("div", { class: "npr-statebar-wrap" },
+    bar,
+    h("p", { class: "npr-muted npr-sm npr-statebar-note" },
+      "No identifiers. This drives a deterministic model of SAH natural history."));
+
+  mount.appendChild(wrap);
+  wrap.addEventListener("input", () => onChange(readStatePanel()));
+  wrap.addEventListener("change", () => onChange(readStatePanel()));
+  onChange(readStatePanel());
+}
+
 export function readStatePanel() {
   const v = (id) => document.getElementById(id)?.value ?? "";
   const b = (id) => !!document.getElementById(id)?.checked;

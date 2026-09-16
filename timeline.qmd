@@ -1,5 +1,9 @@
 ---
 title: "Today on the timeline"
+format:
+  html:
+    grid:
+      body-width: 1400px
 ---
 
 ::: {.npr-disclaimer}
@@ -9,9 +13,7 @@ protocols and the primary literature ([Sources](sources.qmd)).
 :::
 
 ```{=html}
-<div class="npr-layout">
-  <div id="npr-timeline-panel"></div>
-  <div id="npr-timeline-out"></div>
-</div>
+<div id="npr-timeline-panel"></div>
+<div id="npr-timeline-out"></div>
 <script type="module" src="js/npr-page-timeline.js"></script>
 ```
